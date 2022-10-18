@@ -1,0 +1,74 @@
+<mat-card>
+    <mat-card-title-group>
+        <mat-card-title>{{title}} Cliente</mat-card-title>
+        <mat-card-subtitle>Formulario para {{title | lowercase}} clientes</mat-card-subtitle>
+       
+    </mat-card-title-group>
+    <mat-progress-bar mode="indeterminate"  *ngIf="load"></mat-progress-bar>
+    <br>
+    <mat-card-content style="display: flex; justify-content:center;">
+        <form autocomplete="off"
+        style="min-width: 800px;"
+        [formGroup]="ClientForm"
+        (ngSubmit)="save()">
+        <mat-form-field>
+            <input matInput placeholder="Nombre" formControlName="firstName" class="form-control"  name="firstName">
+            <mat-error *ngIf="ClientForm.controls['firstName'].invalid && (ClientForm.controls['firstName'].dirty || ClientForm.controls['firstName'].touched)">
+                <div *ngIf="ClientForm.controls['firstName']?.errors?.['required']">
+                    Nombre es requerido.
+                </div>
+            </mat-error>
+        </mat-form-field>
+        
+        <br>
+        <mat-form-field>
+            <input matInput placeholder="Apellido" formControlName="lastName" class="form-control"  name="lastName">
+            <mat-error *ngIf="ClientForm.controls['lastName'].invalid && (ClientForm.controls['lastName'].dirty || ClientForm.controls['lastName'].touched)">
+                <div *ngIf="ClientForm.controls['lastName']?.errors?.['required']">
+                    Apellido es requerido.
+                </div>
+            </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+            <input matInput placeholder="Correo" formControlName="email" class="form-control"  name="email">
+            <mat-error *ngIf="ClientForm.controls['email'].invalid && (ClientForm.controls['email'].dirty || ClientForm.controls['email'].touched)">
+                <div *ngIf="ClientForm.controls['email']?.errors?.['required']">
+                    Correo es requerido.
+                </div>
+                <div *ngIf="ClientForm.controls['email']?.errors?.['email']">
+                    Correo no valido.
+                </div>
+            </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+            <input matInput placeholder="Direción" formControlName="address" class="form-control"  name="address">
+            <mat-error *ngIf="ClientForm.controls['address'].invalid && (ClientForm.controls['address'].dirty || ClientForm.controls['address'].touched)">
+                <div *ngIf="ClientForm.controls['address']?.errors?.['required']">
+                    Dirección es requerido.
+                </div>
+            </mat-error>
+        </mat-form-field>
+        <br>
+        <button 
+            mat-raised-button
+            dense
+            style="margin: 15px"
+            color="warn"
+            routerLink="/clients/list"
+            aria-label="Example icon-button with menu icon" >
+            <mat-icon>chevron_left</mat-icon> Regresar
+        </button>
+        <button 
+            id="submit"
+            mat-raised-button
+            dense
+            style="margin: 15px"
+            type="submit" color="primary"
+            aria-label="Example icon-button with menu icon" >
+            <mat-icon>save</mat-icon> Guardar
+        </button>
+        </form>
+      </mat-card-content>
+</mat-card>
